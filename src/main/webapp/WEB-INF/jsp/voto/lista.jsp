@@ -23,6 +23,14 @@
 		</c:if>
 
 		<form action="/voto" method="get">
+			<div class="form-group">
+				<label>Eleições:</label> <select class="form-control"
+					name="idEleicao">
+					<c:forEach var="e" items="${eleicoes}">
+						<option value="${e.id}">${e.descricao}</option>
+					</c:forEach>
+				</select>
+			</div>
 			<button type="submit" class="btn btn-primary">Novo</button>
 		</form>
 

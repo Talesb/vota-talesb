@@ -6,7 +6,7 @@
       <a class="navbar-brand" href="/app">Votaew</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="/home">Home</a></li>
+       
 	      <li><a href="/candidatos">Candidato</a></li>
 	      <li><a href="/eleicoes">Eleição</a></li>
 	      <li><a href="/eleitores">Eleitor</a></li>

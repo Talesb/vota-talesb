@@ -15,95 +15,40 @@
 
 	<div class="container mt-3">
 		<h2>Cadastramento de Voto</h2>
-
-
-		<c:if test="${eleicaoSelecionada == null}">
-
-			<form action="/voto/selecionareleicao" method="post">
-
-				<c:if test="${not empty eleicoes}">
-					<label>Eleição:</label>
-					<select class="form-control" name="eleicao.id">
-						<c:forEach var="e" items="${eleicoes}">
-							<option value="${e.id}">${e.descricao}</option>
-						</c:forEach>
-					</select>
-				</c:if>
-
-				<br>
-
-				<button type="submit" class="btn btn-primary">Selecionar
-					Eleição para voto</button>
-
-			</form>
-
-		</c:if>
-
-
-		<c:if test="${eleicaoSelecionada != null && not empty candidatos}">
-
-			<form action="/voto/incluir" method="post">
-
-
-
-
-				<!-- 		  	Eleicao -->
-
-				<select class="form-control" name="eleicao.id">
-					<option value="${eleicaoSelecionada.id}">${eleicaoSelecionada.descricao}</option>
+		<form action="/voto/incluir" method="post">
+			<div class="form-group">
+				<label>Eleitor:</label> <select class="form-control"
+					name="eleitor.id">
+					<c:forEach var="e" items="${eleitores}">
+						<option value="${e.id}">${e.nome}</option>
+					</c:forEach>
 				</select>
+			</div>
 
-				<!-- 		  	Eleitores -->
+			<div class="form-group">
+				<label>Eleição:</label> <select class="form-control"
+					name="eleicao.id">
+					<option value="${eleicao.id}">${eleicao.descricao}</option>
+				</select>
+			</div>
 
-				<c:if test="${not empty eleitores}">
-					<label>Eleitor:</label>
-					<select class="form-control" name="eleitor.id">
-						<c:forEach var="e" items="${eleitores}">
-							<option value="${e.id}">${e.nome}</option>
-						</c:forEach>
-					</select>
-				</c:if>
+			<div class="form-group">
+				<label>Candidato:</label> <select class="form-control"
+					name="candidato.id">
+					<c:forEach var="c" items="${candidatos}">
+						<option value="${c.id}">${c.nome}</option>
+					</c:forEach>
+				</select>
+			</div>
 
-				<c:if test="${empty eleitores}">
-					<c:set var="botao" value="disabled" />
-					<label>Não existem Eleitores cadastrados!!!</label>
-				</c:if>
-
-				<!-- 		  	Candidato -->
-
-				<c:if test="${not empty candidatos}">
-					<label>Candidato:</label>
-					<select class="form-control" name="candidato.id">
-						<c:forEach var="c" items="${candidatos}">
-							<option value="${c.id}">${c.nome}</option>
-						</c:forEach>
-					</select>
-				</c:if>
-
-				<c:if test="${empty candidatos}">
-					<c:set var="botao" value="disabled" />
-					<label>Não existem Candidatos cadastrados!!!</label>
-				</c:if>
-
-				<div class="mb-3 mt-3">
-					<label>Localização:</label> <input type="text" class="form-control"
-						placeholder="Entre com a localização" name="localizacao"
-						value="localizacao">
-				</div>
-
-				<button type="submit" class="btn btn-primary">Cadastrar</button>
-
-
-			</form>
-
-		</c:if>
-
-		<c:if test="${eleicaoSelecionada != null &&  empty candidatos}">
-			<label>Não existem Candidatos cadastrados, Selecione outra
-				eleição!!!</label>
-		</c:if>
-
-
+			<div class="mb-3 mt-3">
+				<label>Localização:</label> <input type="text" class="form-control"
+					placeholder="Entre com a sua localização" name="localizacao"
+					value="Localiza">
+			</div>
+			<br />
+			<button type="submit" class="btn btn-primary">Cadastrar</button>
+		</form>
 
 	</div>
 

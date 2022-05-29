@@ -40,6 +40,6 @@ public class EleicaoController {
 	@GetMapping(value = "/eleicao/{id}/excluir")
 	public String excluir(Model model, @PathVariable Integer id) {
 		eleicaoService.remove(id);
-		return telalista(model);
+		return "redirect:/eleicoes";
 	}
 }

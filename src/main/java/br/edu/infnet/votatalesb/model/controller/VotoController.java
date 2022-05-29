@@ -6,7 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import br.edu.infnet.votatalesb.model.domain.Eleicao;
 import br.edu.infnet.votatalesb.model.domain.Voto;
 import br.edu.infnet.votatalesb.model.service.CandidatoService;
 import br.edu.infnet.votatalesb.model.service.EleicaoService;
@@ -21,16 +23,24 @@ public class VotoController {
 
 	@Autowired
 	private EleitorService eleitorService;
-	
+
 	@Autowired
-	private EleicaoService  eleicaoService;
-	
+	private EleicaoService eleicaoService;
+
 	@Autowired
-	private CandidatoService  candidatoService;
+	private CandidatoService candidatoService;
 
 	@GetMapping(value = "/voto")
-	public String cadastro(Model model) {
-		model.addAttribute("eleicoes",eleicaoService.getAll());
+	public String cadastro(Model model, @RequestParam Integer idEleicao) {
+
+		Eleicao eleicao = eleicaoService.getById(idEleicao);
+
+		model.addAttribute("eleicao", eleicao);
+
+		model.addAttribute("candidatos", candidatoService.getByEleicaoId(eleicao));
+
+		model.addAttribute("eleitores", eleitorService.getAll());
+
 		return "voto/cadastro";
 	}
 
@@ -39,17 +49,11 @@ public class VotoController {
 		votoService.incluir(voto);
 		return "redirect:/votos";
 	}
-	
-	@PostMapping(value = "/voto/selecionareleicao")
-	public String selecionarEleicao(Model model, Voto voto) {
-		model.addAttribute("candidatos", candidatoService.getByEleicaoId(voto.getEleicao()));
-		model.addAttribute("eleicaoSelecionada", eleicaoService.getById(voto.getEleicao().getId()));
-		model.addAttribute("eleitores", eleitorService.getAll());
-		return "/voto/cadastro";
-	}
+ 
 
 	@GetMapping(value = "/votos")
 	public String telaLista(Model model) {
+		model.addAttribute("eleicoes", eleicaoService.getAll());
 		return telalista(model);
 	}
 
@@ -61,7 +65,7 @@ public class VotoController {
 	@GetMapping(value = "/voto/{id}/excluir")
 	public String excluir(Model model, @PathVariable Integer id) {
 		votoService.remove(id);
-		return telalista(model);
+		return "redirect:/votos";
 	}
 
 }

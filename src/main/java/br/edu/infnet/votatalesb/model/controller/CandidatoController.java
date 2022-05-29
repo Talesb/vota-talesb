@@ -46,7 +46,7 @@ public class CandidatoController {
 	@GetMapping(value = "/candidato/{id}/excluir")
 	public String excluir(Model model, @PathVariable Integer id) {
 		candidatoService.remove(id);
-		return telalista(model);
+		return "redirect:/candidatos";
 	}
 
 }

@@ -40,7 +40,7 @@ public class EleitorController {
 	@GetMapping(value = "/eleitor/{id}/excluir")
 	public String excluir(Model model, @PathVariable Integer id) {
 		eleitorService.remove(id);
-		return telalista(model);
+		return "redirect:/eleitores";
 	}
 
 }
