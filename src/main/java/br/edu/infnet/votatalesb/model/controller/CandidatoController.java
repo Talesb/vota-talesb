@@ -16,13 +16,13 @@ public class CandidatoController {
 
 	@Autowired
 	private CandidatoService candidatoService;
-	
+
 	@Autowired
 	private EleicaoService eleicaoService;
 
 	@GetMapping(value = "/candidato")
 	public String cadastro(Model model) {
-		
+
 		model.addAttribute("eleicoes", eleicaoService.getAll());
 		return "candidato/cadastro";
 	}
@@ -30,7 +30,7 @@ public class CandidatoController {
 	@PostMapping(value = "/candidato/incluir")
 	public String incluir(Model model, Candidato candidato) {
 		candidatoService.incluir(candidato);
-		return telalista(model);
+		return "redirect:/candidatos";
 	}
 
 	@GetMapping(value = "/candidatos")

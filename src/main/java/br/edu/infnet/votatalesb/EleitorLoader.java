@@ -26,7 +26,7 @@ public class EleitorLoader implements ApplicationRunner {
 		eleitor.setToken("8484-5484-154");
 
 		try {
-			eleitorService.incluir(eleitor);
+//			eleitorService.incluir(eleitor);
 			System.out.println("Sucesso! Inclusão realizada!!");
 		} catch (Exception e) {
 			System.out.println("[ERRO] " + e.getMessage());

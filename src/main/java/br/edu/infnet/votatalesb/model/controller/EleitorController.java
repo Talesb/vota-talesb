@@ -24,7 +24,7 @@ public class EleitorController {
 	@PostMapping(value = "/eleitor/incluir")
 	public String incluir(Model model, Eleitor eleitor) {
 		eleitorService.incluir(eleitor);
-		return telalista(model);
+		return "redirect:/eleitores";
 	}
 
 	@GetMapping(value = "/eleitores")

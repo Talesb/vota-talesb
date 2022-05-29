@@ -21,7 +21,7 @@ public class VotoLoader implements ApplicationRunner {
 		voto.setLocalizacao("Físico");
 
 		try {
-			votoService.incluir(voto);
+//			votoService.incluir(voto);
 			System.out.println("Sucesso! Inclusão realizada!!");
 		} catch (Exception e) {
 			System.out.println("[ERRO] " + e.getMessage());

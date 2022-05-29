@@ -21,7 +21,7 @@ public class EleicaoLoader implements ApplicationRunner {
 		eleicao.setDescricao("Eleições 2022_1");
 
 		try {
-			eleicaoService.incluir(eleicao);
+//			eleicaoService.incluir(eleicao);
 			System.out.println("Sucesso! Inclusão realizada!!");
 		} catch (Exception e) {
 			System.out.println("[ERRO] " + e.getMessage());
