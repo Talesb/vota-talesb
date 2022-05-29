@@ -20,6 +20,7 @@ public class CandidatoLoader implements ApplicationRunner {
 		Candidato candidato = new Candidato();
 		candidato.setNome("Candidato Elberth");
 		candidato.setNumero(1978);
+		 
 
 		try {
 			candidatoService.incluir(candidato);

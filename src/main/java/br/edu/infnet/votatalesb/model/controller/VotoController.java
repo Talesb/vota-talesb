@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import br.edu.infnet.votatalesb.model.domain.Voto;
+import br.edu.infnet.votatalesb.model.service.CandidatoService;
+import br.edu.infnet.votatalesb.model.service.EleicaoService;
 import br.edu.infnet.votatalesb.model.service.EleitorService;
 import br.edu.infnet.votatalesb.model.service.VotoService;
 
@@ -19,19 +21,31 @@ public class VotoController {
 
 	@Autowired
 	private EleitorService eleitorService;
+	
+	@Autowired
+	private EleicaoService  eleicaoService;
+	
+	@Autowired
+	private CandidatoService  candidatoService;
 
 	@GetMapping(value = "/voto")
 	public String cadastro(Model model) {
-
-		model.addAttribute("eleitores", eleitorService.getAll());
-
+		model.addAttribute("eleicoes",eleicaoService.getAll());
 		return "voto/cadastro";
 	}
 
 	@PostMapping(value = "/voto/incluir")
 	public String incluir(Model model, Voto voto) {
 		votoService.incluir(voto);
-		return telalista(model);
+		return "redirect:/votos";
+	}
+	
+	@PostMapping(value = "/voto/selecionareleicao")
+	public String selecionarEleicao(Model model, Voto voto) {
+		model.addAttribute("candidatos", candidatoService.getByEleicaoId(voto.getEleicao()));
+		model.addAttribute("eleicaoSelecionada", eleicaoService.getById(voto.getEleicao().getId()));
+		model.addAttribute("eleitores", eleitorService.getAll());
+		return "/voto/cadastro";
 	}
 
 	@GetMapping(value = "/votos")

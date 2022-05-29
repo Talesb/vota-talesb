@@ -2,12 +2,14 @@ package br.edu.infnet.votatalesb.model.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 @Entity
@@ -22,7 +24,9 @@ public class Eleitor {
 	private String email;
 	private String telefone;
 	private String token;
-	@Transient
+	 
+	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@JoinColumn(name="idEleitor")
 	private List<Voto> votos;
 	
 	

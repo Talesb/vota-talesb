@@ -12,7 +12,7 @@
 	<c:import url="/WEB-INF/jsp/menu.jsp"/>
 
 	<div class="container mt-3">
-	  <h2>Cadastramento de Solicitantes</h2>
+	  <h2>Cadastramento de Eleições</h2>
 	  
 	  <c:if test="${not empty mensagem}">
 		<div class="alert alert-success">
@@ -27,7 +27,7 @@
 	  <hr>
 		
 	<c:if test="${not empty lista}">		
-		<h2>Total de Solicitantes: ${lista.size()}</h2>
+		<h2>Total de Eleicoes: ${lista.size()}</h2>
 		  
 		<table class="table table-striped">
 		    <thead>
@@ -42,7 +42,7 @@
 			      <tr>
 			        <td>${s.id}</td>
 			        <td>${s.descricao}</td>
-			        <td><a href="/solicitante/${s.id}/excluir">excluir</a></td>
+			        <td><a href="/eleicao/${s.id}/excluir">excluir</a></td>
 			      </tr>
 		      </c:forEach>		      
 		    </tbody>

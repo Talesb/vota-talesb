@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "TVoto")
@@ -21,11 +20,15 @@ public class Voto {
 	private String localizacao;
 
 	@ManyToOne()
-	@JoinColumn(name="idEleitor")
+	@JoinColumn(name = "idEleitor")
 	private Eleitor eleitor;
-	@Transient
+
+	@ManyToOne()
+	@JoinColumn(name = "idCandidato")
 	private Candidato candidato;
-	@Transient
+	
+	@ManyToOne()
+	@JoinColumn(name="idEleicao")
 	private Eleicao eleicao;
 
 	public Voto() {
@@ -79,7 +82,5 @@ public class Voto {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	
 
 }
