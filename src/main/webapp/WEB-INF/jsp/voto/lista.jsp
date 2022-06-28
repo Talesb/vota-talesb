@@ -55,9 +55,9 @@
 						<tr>
 							<td>${s.id}</td>
 							<td>${s.localizacao}</td>
-							<td>${s.eleitor.nome}</td>
-							<td>${s.eleicao.descricao}</td>
-							<td>${s.candidato.nome}</td>
+							<td>${s.nomeEleitor}</td>
+							<td>${s.descricaoEleicao}</td>
+							<td>${s.nomeCandidato}</td>
 							<td><a href="/voto/${s.id}/excluir">excluir</a></td>
 						</tr>
 					</c:forEach>

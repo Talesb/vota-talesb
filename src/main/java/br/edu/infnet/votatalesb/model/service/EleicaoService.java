@@ -5,29 +5,29 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.edu.infnet.votatalesb.model.domain.Eleicao;
-import br.edu.infnet.votatalesb.model.repository.EleicaoRepository;
+import br.edu.infnet.votatalesb.clients.VotacaoClient;
+import br.edu.infnet.votatalesb.model.domain.dto.EleicaoDTO;
 
 @Service
 public class EleicaoService {
-
+	
 	@Autowired
-	private EleicaoRepository eleicaoRepository;
+	private VotacaoClient votacaoClient;
 
-	public void incluir(Eleicao eleicao) {
-		eleicaoRepository.save(eleicao);
+	public List<EleicaoDTO> getAll() {
+		return (List<EleicaoDTO>) votacaoClient.obterListaEleicao();
 	}
 
-	public List<Eleicao> getAll() {
-		return (List<Eleicao>) this.eleicaoRepository.findAll();
-	}
-
-	public Eleicao getById(Integer id) {
-		return this.eleicaoRepository.findById(id).orElse(null);
+	public void incluir(EleicaoDTO eleicao) {
+		votacaoClient.incluirEleicao(eleicao);
 	}
 
 	public void remove(Integer id) {
-		eleicaoRepository.deleteById(id);
+		votacaoClient.removerEleicao(id);
+	}
+
+	public EleicaoDTO getById(Integer id) {
+		return votacaoClient.obterEleicaoPorId(id);
 	}
 
 }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import br.edu.infnet.votatalesb.model.domain.Eleicao;
+import br.edu.infnet.votatalesb.model.domain.dto.EleicaoDTO;
 import br.edu.infnet.votatalesb.model.service.EleicaoService;
 
 @Controller
@@ -22,7 +22,7 @@ public class EleicaoController {
 	}
 
 	@PostMapping(value = "/eleicao/incluir")
-	public String incluir(Model model, Eleicao eleicao) {
+	public String incluir(Model model, EleicaoDTO eleicao) {
 		eleicaoService.incluir(eleicao);
 		return "redirect:/eleicoes";
 	}

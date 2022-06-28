@@ -5,30 +5,30 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.edu.infnet.votatalesb.model.domain.Candidato;
-import br.edu.infnet.votatalesb.model.domain.Eleicao;
-import br.edu.infnet.votatalesb.model.repository.CandidatoRepository;
+import br.edu.infnet.votatalesb.clients.VotacaoClient;
+import br.edu.infnet.votatalesb.model.domain.dto.CandidatoDTO;
+import br.edu.infnet.votatalesb.model.domain.dto.EleicaoDTO;
 
 @Service
 public class CandidatoService {
 
 	@Autowired
-	private CandidatoRepository candidatoRepository;
+	private VotacaoClient votacaoClient;
 
-	public void incluir(Candidato candidato) {
-		candidatoRepository.save(candidato);
+	public List<CandidatoDTO> getAll() {
+		return (List<CandidatoDTO>) votacaoClient.obterListaCandidato();
 	}
 
-	public List<Candidato> getAll() {
-		return (List<Candidato>) this.candidatoRepository.findAll();
+	public List<CandidatoDTO> getByEleicaoId(EleicaoDTO eleicao) {
+		return votacaoClient.obterCandidatosPorEleicaoId(eleicao.getId());
 	}
 
-	public List<Candidato> getByEleicaoId(Eleicao eleicaoId) {
-		return (List<Candidato>) this.candidatoRepository.findByEleicao(eleicaoId);
+	public void incluir(CandidatoDTO candidato) {
+		this.votacaoClient.incluirCandidato(candidato);
 	}
 
 	public void remove(Integer id) {
-		candidatoRepository.deleteById(id);
+		this.votacaoClient.removerCandidato(id);
 	}
 
 }

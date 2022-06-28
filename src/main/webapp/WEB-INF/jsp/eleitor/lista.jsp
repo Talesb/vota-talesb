@@ -51,7 +51,7 @@
 			        <td>${s.email}</td>
 			        <td>${s.telefone}</td>
 			         <td>${s.token}</td>
-			         <td>${s.votos.size()}</td>
+			         <td>${s.qtdVotos}</td>
 			        <td><a href="/eleitor/${s.id}/excluir">excluir</a></td>
 			      </tr>
 		      </c:forEach>		      

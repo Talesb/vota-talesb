@@ -18,7 +18,7 @@
 		<form action="/voto/incluir" method="post">
 			<div class="form-group">
 				<label>Eleitor:</label> <select class="form-control"
-					name="eleitor.id">
+					name="eleitorId">
 					<c:forEach var="e" items="${eleitores}">
 						<option value="${e.id}">${e.nome}</option>
 					</c:forEach>
@@ -27,14 +27,14 @@
 
 			<div class="form-group">
 				<label>Eleição:</label> <select class="form-control"
-					name="eleicao.id">
+					name="eleicaoId">
 					<option value="${eleicao.id}">${eleicao.descricao}</option>
 				</select>
 			</div>
 
 			<div class="form-group">
 				<label>Candidato:</label> <select class="form-control"
-					name="candidato.id">
+					name="candidatoId">
 					<c:forEach var="c" items="${candidatos}">
 						<option value="${c.id}">${c.nome}</option>
 					</c:forEach>

@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import br.edu.infnet.votatalesb.model.domain.Eleicao;
-import br.edu.infnet.votatalesb.model.domain.Voto;
+import br.edu.infnet.votatalesb.model.domain.dto.EleicaoDTO;
+import br.edu.infnet.votatalesb.model.domain.dto.VotoDTO;
 import br.edu.infnet.votatalesb.model.service.CandidatoService;
 import br.edu.infnet.votatalesb.model.service.EleicaoService;
 import br.edu.infnet.votatalesb.model.service.EleitorService;
@@ -33,7 +33,7 @@ public class VotoController {
 	@GetMapping(value = "/voto")
 	public String cadastro(Model model, @RequestParam Integer idEleicao) {
 
-		Eleicao eleicao = eleicaoService.getById(idEleicao);
+		EleicaoDTO eleicao = eleicaoService.getById(idEleicao);
 
 		model.addAttribute("eleicao", eleicao);
 
@@ -45,7 +45,7 @@ public class VotoController {
 	}
 
 	@PostMapping(value = "/voto/incluir")
-	public String incluir(Model model, Voto voto) {
+	public String incluir(Model model, VotoDTO voto) {
 		votoService.incluir(voto);
 		return "redirect:/votos";
 	}
