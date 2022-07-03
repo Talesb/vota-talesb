@@ -30,7 +30,7 @@
 			
 			<c:if test="${not empty eleicoes}">
 		  	<label>Eleição:</label>
-		  	<select class="form-control mt-3"  name="eleicao.id">
+		  	<select class="form-control mt-3"  name="eleicaoId">
 		    	<c:forEach var="e" items="${eleicoes}">
 		    	<option value="${e.id}">${e.descricao}</option>
 		    	</c:forEach>

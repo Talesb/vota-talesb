@@ -1,6 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="security"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,25 +18,23 @@
 	<div class="container mt-3">
 		<h2>Cadastramento de Votos</h2>
 
-		<c:if test="${not empty mensagem}">
-			<div class="alert alert-success">
-				<strong>Confirmação!</strong> ${mensagem}
-			</div>
-		</c:if>
+		<security:authorize access="hasRole('ADMIN')">
 
-		<form action="/voto" method="get">
-			<div class="form-group">
-				<label>Eleições:</label> <select class="form-control"
-					name="idEleicao">
-					<c:forEach var="e" items="${eleicoes}">
-						<option value="${e.id}">${e.descricao}</option>
-					</c:forEach>
-				</select>
-			</div>
-			<button type="submit" class="btn btn-primary">Novo</button>
-		</form>
+			<form action="/voto" method="get">
+				<div class="form-group">
+					<label>Eleições:</label> <select class="form-control"
+						name="idEleicao">
+						<c:forEach var="e" items="${eleicoes}">
+							<option value="${e.id}">${e.descricao}</option>
+						</c:forEach>
+					</select>
+				</div>
+				<button type="submit" class="btn btn-primary">Novo</button>
+			</form>
 
-		<hr>
+			<hr>
+
+		</security:authorize>
 
 		<c:if test="${not empty lista}">
 			<h2>Total de Votos: ${lista.size()}</h2>
@@ -58,7 +58,13 @@
 							<td>${s.nomeEleitor}</td>
 							<td>${s.descricaoEleicao}</td>
 							<td>${s.nomeCandidato}</td>
-							<td><a href="/voto/${s.id}/excluir">excluir</a></td>
+
+							<security:authorize access="hasRole('ADMIN')">
+
+								<td><a href="/voto/${s.id}/excluir">excluir</a></td>
+
+							</security:authorize>
+
 						</tr>
 					</c:forEach>
 				</tbody>

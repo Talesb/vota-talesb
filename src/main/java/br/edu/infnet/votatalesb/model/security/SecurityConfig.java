@@ -26,10 +26,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/usuario/**").permitAll()
-//		 .antMatchers("/usuario/incluir").permitAll()
-//		 .antMatchers("/enderecos").permitAll()
-//		 .antMatchers("/enderecos/**").hasRole("ADMIN")
-//		 .antMatchers("/estados").hasRole("ADMIN")
+// 		 .antMatchers("/candidatos").permitAll()
+// 		 .antMatchers("/eleicoes").permitAll()
+// 		 .antMatchers("/eleitores").permitAll()
+// 		 .antMatchers("/votos").permitAll()
+		 .antMatchers("/candidato/**").hasRole("ADMIN")
+		 .antMatchers("/eleicao/**").hasRole("ADMIN")
+		 .antMatchers("/eleitor/**").hasRole("ADMIN")
+		 .antMatchers("/voto/**").hasRole("ADMIN")
 				.anyRequest().authenticated().and().csrf().disable().formLogin().loginPage("/login").permitAll().and()
 				.exceptionHandling().accessDeniedPage("/negado");
 
